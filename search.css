@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing:border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(184, 183, 183);
+    width: 100%;
+    padding: 1em 20px 1em 20px;
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+}
+
+.icon{
+    width:17%;
+}
+.search{   
+    width:43%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.search-bar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width:370px;
+    border-radius: 2rem;
+    padding: 0.5em;
+    box-shadow: 0px 0px 4px 1px rgba(149, 146, 146, 0.59);
+}
+
+.login{
+    width:19%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-bar .items{
+    border-right: 1px solid rgb(195, 195, 195);
+    padding-right: 1rem;
+}
+
+.search-bar .search-icon{
+    background-color: #de3151;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar .search-icon .icon{
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 15px;
+}
+
+/*main*/
+
+.container{
+    position: relative;
+    top:82px;
+}
+
+@media screen and (min-width:769px) and (max-width:1024px)  {
+    .search{
+        width:55%;
+    }
+}
+
+
+@media screen and (min-width:320px) and (max-width:768px) {
+    *{
+        font-size:14px;
+    }
+
+    .search{
+        width:50%;
+    }
+
+    .navbar{
+        padding: 10px;
+    }
+
+    .icon img{
+        width: 80px;
+    }
+
+    .login img {
+        width:70px;
+    }
+    
+    .login div{
+        display: none;
+    }
+
+}
+
+@media screen and (min-width:481px) and (max-width:768px)  {
+    .search{
+        width:62%;
+    }
+
+    .login{
+        width:15%;
+    }
+}
+
+@media screen and (min-width:320px) and (max-width:480px)  {
+    .search, .login div{
+        display: none;
+    }
+}
