@@ -5,10 +5,11 @@
     padding: 0px;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
 }
 
 :root{
-    --pink: #de3151;  
+    --pink: rgb(222, 49, 81);  
     --font-grey: rgb(113, 113, 113);
     --font-size: 2.2rem;
 }
@@ -163,6 +164,11 @@
     color: white;
 }
 
+.bg-img button:focus{
+    background-color: var(--pink);
+    color: white;
+}
+
 /*card*/
 
 .seactionThree{
@@ -292,6 +298,11 @@
     color: white;
 }
 
+.discover-flex button:focus{
+    background-color: black;
+    color: white;
+}
+
 /*gift card*/
 
 .gift-card{
@@ -339,6 +350,12 @@
     border: 3px solid black;
 }
 
+.gift-card button:focus{
+    color: black;
+    background-color: white;
+    border: 3px solid black;
+}
+
 /*ask questions*/
 .ask{
     background-image: url("./assets/ask.jpg");
@@ -374,6 +391,11 @@
 }
 
 .ask button:hover{
+    color:white;
+    background-color: black;
+}
+
+.ask button:focus{
     color:white;
     background-color: black;
 }

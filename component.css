@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Press+Start+2P&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins';
+}
+
+header{
+    position:fixed;
+    width:100%;
+    background-color: white;
+    z-index: 100;
+}
+
+nav {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 0px 1em 0px;
+    width:85%;
+    margin-inline: auto;
+    
+}
+
+.container{
+    position:relative;
+    top:68px;
+    background-color: rgb(247,247,247);
+}
+
+/*experience*/
+
+.experience-section{
+    display: flex;
+    flex-direction: column;
+    padding-top:3em;
+    background-color: rgb(255, 244, 247); 
+    row-gap:3em; 
+    overflow-x: hidden;
+}
+
+.review-box{
+    min-height: 50vh;
+    transform: translateX(400%);
+    transition: transform 0.6s ease-in;
+}
+
+.review-box:nth-child(odd){
+    transform: translateX(-400%);
+}
+
+.review-box.show{
+    transform: translateX(0);
+}
+
+.review-text{
+    width:60%;
+    min-height: 300px;
+    background: rgb(255, 244, 247); 
+    color:#c03308;
+    padding-inline:20px;
+}
+
+.review-box:nth-child(odd) .review-text{
+    transform: translateX(10%); 
+}
+
+.review-box:nth-child(even) .review-text{
+    transform: translateX(60%); 
+}
+
+.review-text .title{
+    font-size: 2rem;
+    font-weight: 900;
+    padding-bottom:10px;
+}
+
+.review-text .sub-heading{
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-bottom:10px;
+}
+
+.review-text .para{
+    font-size:1.2rem;
+}
+
+
+/*ask question*/
+
+.content{
+    text-align: center;
+    padding-top: 1.8em;
+    min-height:87vh
+}
+
+.content .aircover{
+    font-size: 12rem;
+    font-weight: 900;
+    color:rgb(255,56,92);
+    height: 0;
+    overflow: hidden;
+    transition: height 0.6s ease-in;
+}
+
+.content .aircover.show{
+    height: 220px;
+}
+
+.content .host{
+    font-size: 4rem;
+    margin-bottom:20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.6s ease-in 0.5s;
+}
+
+.content .host.show{
+    height:100px;
+}
+
+.content .aircover-para{
+    font-size: 2rem;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.6s ease-in 1s;
+}
+
+.content .aircover-para.show{
+    height: 150px;
+}
+
+.questions{
+    width:85%;
+    margin-inline: auto;
+    display:flex;
+    justify-content: space-between;
+    gap:55px;
+    margin-top:2em;
+    padding-top:5em;
+    border-top: 1px solid rgb(117, 117, 117);
+}
+
+.questions-heading{
+    width:50%;
+    font-size: 3.5rem;
+    font-weight: 900;
+}
+
+.accordion{
+    width:50%;
+}
+
+@media screen and (min-width:320px) and (max-width:480px) {
+    .experience-section .review-box .review-text{
+        transform: none; 
+    }  
+    
+    .experience-section{
+        row-gap: 5em;
+    }
+
+    .review-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .review-text{
+        padding-inline: 0px;
+    }
+}
