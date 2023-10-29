@@ -8,7 +8,7 @@ window.addEventListener("load", () => {
 });
 
 function checkBoxes(){
-    const triggerBottom = window.innerHeight/5 * 4;
+    const triggerBottom = window.innerHeight*0.9;
     //innnerHeight takes the height of viewport in pixels
 
     boxes.forEach(box => {

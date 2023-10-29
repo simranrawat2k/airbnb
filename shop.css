@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Press+Start+2P&display=swap');
+
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'poppins';
+}
+
+
+header{
+    position:fixed;
+    width:100%;
+    background-color: rgb(19,39,54);
+    z-index: 100;
+}
+
+nav {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 0px 1em 0px;
+    width:85%;
+    margin-inline: auto;   
+}
+
+.container{
+    position:relative;
+    top:68px;
+    background-color: rgb(247,247,247);
+}
+
+.clock{
+    width:85%;
+    margin-inline: auto;
+    height:91vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock .clock-border{
+    border:2px solid rgb(19,39,54);
+    width:100%;
+    height:70vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clock .image img{
+    width:35vw;
+    height:auto;
+}
+
+.clock-border .image{
+    text-align: center;
+    padding-left: 2em;
+}
+
+.shop-card{
+    background-color: rgb(19,39,54);
+    color:white;
+}
+
+/*
+set display: flex on the .shop-flex container and apply align-items: stretch to make the columns equal in height.
+ set display: flex on the .shop-text-1 and .shop-text-2 divs to ensure that their children fill the available space.
+*/
+
+.shop-flex{
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 4em 8em;
+}
+
+.card-1, .card-2{
+    width:45%;
+    display: flex; /* Ensure children fill the available space vertically */
+    flex-direction: column;
+}
+
+.card-1 h1, .card-2 h1{
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.shop-text-1, .shop-text-2{
+    background-color: white;
+    color:rgb(19,39,54);
+    padding:1em;
+    position: relative;
+    font-size: 1.2rem;
+    height: 100%;   
+    display: flex; /* Ensure children fill the available space vertically */
+    flex-direction: column;
+    padding-bottom:4em;
+}
+
+.left-arrow {
+    position: absolute;
+    bottom: 15px;
+    right: 60px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding:2px;
+    border-radius:10px;
+}
+
+.right-arrow {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding:2px;
+    border-radius:10px;
+}
+
+.btn-container .buy-now{
+    padding:5px;
+    font-size: 1.2rem;
+    border:none;
+    color: rgb(161, 0, 0);
+    position:absolute;
+    bottom:18px;
+}
+
+@media  screen and (min-width: 769px) and (max-width: 1024px) {
+    .shop-flex{
+        padding-inline: 2em;
+    }
+
+    .card-1, .card-2{
+        width:47%;
+    }
+}
+
+@media  screen and (min-width: 320px) and (max-width: 768px) {
+    .shop-flex{
+        display:block;
+        padding: 4em 5em 1em 5em;
+    }
+
+    .card-1, .card-2{
+        width:100%;
+        margin-bottom:4em;
+    }
+}
+
+@media  screen and (min-width: 320px) and (max-width: 480px) {
+    .shop-flex{
+        display:block;
+        padding: 4em 1em 1em 1em;
+    }
+
+}

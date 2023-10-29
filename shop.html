@@ -1,35 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Airbnb Clone</title>
-        <link rel="stylesheet" href="./component.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-            integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="icon" href="https://static-00.iconduck.com/assets.00/airbnb-icon-512x512-d9grja5t.png">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb Clone</title>
+    <link rel="stylesheet" href="./shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="https://static-00.iconduck.com/assets.00/airbnb-icon-512x512-d9grja5t.png">
+</head>
+
 <body>
-    
+
     <header>
         <nav>
             <section class="icon">
                 <div class="icon-img">
-                    <img src="./assets/icon2.png" alt="logo">
+                    <img src="./assets/Vector.png" alt="logo">
                 </div>
             </section>
 
             <section class="home-icon">
                 <a href="./index.html">
-                    <i class="fa-solid fa-house fa-2xl" style="color: #de3151;"></i>
+                    <i class="fa-solid fa-house fa-2xl" style="color: #ffffff;"></i>
                 </a>
             </section>
         </nav>
     </header>
 
     <main class="container">
+        <div class="clock">
+            <div class="clock-border">
+                <div class="image">
+                    <img src="./assets/shop.jpg" alt="logo">
+                </div>
 
+                <div class="date">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="shop-card">
+            <div class="shop-flex">
+
+                <div class="card-1">
+                    <h1>City Escapes</h1>
+                    <div class="shop-text-1">
+                        <div class="slider-1">
+                            <h2>Escape to Nature's Embrace</h2>
+                            <p>$100</p>
+                            <p> Experience the beauty of the great outdoors with this gift card. Cozy up in rustic
+                                cabins, hike
+                                through scenic trails, and stargaze by the campfire.</p>
+                        </div>
+
+                        <div class="btn-container">
+                            <button class="buy-now">Buy Now</button>
+
+                            <button class="left-arrow">
+                                <i class="fa-solid fa-angles-left"></i>
+                            </button>
+
+                            <button class="right-arrow">
+                                <i class="fa-solid fa-angles-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card-2">
+                    <h1>Foodie's Paradise</h1>
+                    <div class="shop-text-2">
+                        <div class="slider-1">
+                            <h2>Culinary Delights Escapade</h2>
+                            <p>$100</p>
+                            <p>Embark on a gastronomic adventure with this gift card. Indulge in the finest cuisine,
+                                savor
+                                delectable flavors, and explore the culinary wonders of your chosen destination.</p>
+                        </div>
+
+                        <div class="btn-container">
+                            <button class="buy-now">Buy Now</button>
+
+                            <button class="left-arrow">
+                                <i class="fa-solid fa-angles-left"></i>
+                            </button>
+
+                            <button class="right-arrow">
+                                <i class="fa-solid fa-angles-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
 
@@ -38,4 +106,5 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./component.js"></script>
 </body>
+
 </html>
