@@ -9,7 +9,7 @@
 }
 
 :root{
-    --pink: rgb(222, 49, 81);  
+    --pink: #de3151;  
     --font-grey: rgb(113, 113, 113);
     --font-size: 2.2rem;
 }
@@ -37,6 +37,10 @@
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.nav-content .hideLogin{
+    display:none;
 }
 
 .links a{
@@ -67,9 +71,94 @@
     width:100%;
 }
 
+/*modal*/
+.overlay {
+    width:100%;
+    height:100vh;
+    background-color: hsla(0, 0%, 0%, 0.54);
+    z-index:200;
+    position:absolute;
+    transition: 0.5s;
+    display: none;
+}
+
+.showOverlay{
+    display:block;
+}
+
+.modal{
+    position:absolute;
+    z-index: 300;
+    background-color: white;
+    top:-50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    padding:1em 2em;
+    font-size: 1.5rem;
+    width:500px;
+    transition: 0.7s;
+}
+
+.showModal{
+    display:block;
+    top:50%;
+}
+
+.modal form label{
+    display: block;
+}
+
+.modal .modal-heading{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:1em;
+}
+
+.modal .modal-heading div{
+    font-size: 3rem;
+    cursor:pointer;
+}
+
+.modal form input{
+    width:100%;
+    font-size:1.2rem;
+    padding:5px;
+}
+
+.modal form button{
+    font-size: 1.2rem;
+    margin-top:1.2em;
+    background-color: var(--pink);
+    color:white;
+    padding:10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.nav-content .addInitial{
+    background-color: var(--pink);
+    color:white;
+    border-radius: 50%;
+    width:40px;
+    height:40px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-align: center;
+    cursor: pointer;
+}
+
+
 .container{
     position: relative;
     top:70px;
+}
+
+.nav-content .login img{
+    cursor: pointer;
 }
 
 /*search-bar*/
@@ -92,6 +181,12 @@
     padding: 10px 20px 10px 40px;
 }
 
+.search-bar button{
+    border:none;
+    background-color: white;
+    cursor:pointer;
+}
+
 .search-bar .items{
     border-right: 1px solid rgb(195, 195, 195);
     padding-right: 5rem;
@@ -109,6 +204,7 @@
 .search-bar .search-icon{
     background-color: var(--pink);
     width: 45px;
+    height:45px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -120,6 +216,267 @@
     justify-content: center;
     align-self: center;
 }
+
+/*dropdown*/
+
+/*Location-dropdown*/
+
+.location-dropdown{
+    position: absolute;
+    width:40%;
+    top: 70px;
+    left: 12%;
+    padding:2em;
+    background-color: white;
+    border-radius: 60px;
+   /* max-height: 460px;*/
+   display:none;
+    
+}
+
+.showLocationDropdown{
+    display:block;
+}
+
+.location-dropdown .location-dropdown-flex{
+    display:flex;
+    justify-content: space-between;
+    row-gap:30px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 20px;
+}
+
+.location-dropdown-flex div{
+    width:  27%; 
+    text-align: center;
+    cursor:pointer;
+}
+
+.location-dropdown-flex img{
+    border-radius: 30px;
+    width:100%;
+}
+
+.location-dropdown-flex div img:hover{
+    border:1px solid black;
+}
+
+.location-dropdown-flex div img:focus{
+    border:1px solid black;
+}
+
+/*Calender*/
+/*check-in-dropdown*/
+.check-in-dropdown{
+    width: 370px;
+    position: absolute;
+    background-color: white;
+    top: 74px;
+    left: 30%;
+    border-radius: 20px;
+    display: block;
+}
+
+.check-in-calendar {
+    margin: 20px 12px 5px 12px;
+}
+
+.check-in-calendar .check-in-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-inline: 10px;
+}
+
+.check-in-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+#check-in-prev, #check-in-next {
+    background-color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border: 1px solid #de3151;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+
+
+.calender-check-in{
+    padding: 0px 15px 15px 15px;
+}
+
+.calender-check-in ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calender-check-in .check-in-weeks li{
+    font-weight: 900;
+    width: 48px;
+    text-align: center;
+    padding: 11px;
+}
+
+.calender-check-in ul li{
+    width: 48px;
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.calender-check-in .check-in-days .inactiveCheckIn{
+    color:#aaa;
+}
+
+.calender-check-in .check-in-days .activeCheckIn{
+    color:#ffffff;
+    background-color: #de4561;
+}
+
+
+
+/*check-out-dropdown*/
+
+.check-out-dropdown{
+    width: 370px;
+    position: absolute;
+    background-color: white;
+    top: 74px;
+    left: 46%;
+    border-radius: 20px;
+    display: none;
+}
+
+
+.calendar {
+    margin: 20px 12px 5px 12px;
+}
+
+.calendar .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-inline: 10px;
+}
+
+.calender-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+#prevMonth, #nextMonth {
+    background-color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border: 1px solid #de3151;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+
+.calendar .todays-date{
+    background-color: #de3151;
+    color:white;   
+}
+
+
+.calender-check-out{
+    padding: 0px 15px 15px 15px;
+}
+
+.calender-check-out ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calender-check-out .weeks li{
+    font-weight: 900;
+    width: 48px;
+    text-align: center;
+    padding: 11px;
+}
+
+.calender-check-out ul li{
+    width: 48px;
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.calender-check-out .days .inactive{
+    color:#aaa;
+}
+
+.calender-check-out .days .active{
+    color:#ffffff;
+    background-color: #de4561;
+}
+
+
+/*guest-dropdown*/
+
+.guest-dropdown {
+    width: 400px;
+    position: absolute;
+    background-color: white;
+    border-radius: 30px;
+    padding: 2em 2em 0em 2em;
+    top: 72px;
+    right:12.5%;
+    display: none;
+}
+
+.showGuestDropdown{
+    display:block;
+}
+
+.guest-icons{
+    display:flex;
+    gap:20px;
+    font-size: 1.4rem;
+    align-items: center;
+    justify-content: center;
+    color:var(--font-grey);
+}
+
+.add-guest{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e2e0e0;
+}
+
+.guest-dropdown .add-guest:last-child {
+    border-bottom: none;
+}
+
+.fa-minus, .fa-plus{
+    border: 2px solid var(--font-grey);
+    padding:10px;
+    border-radius:50%;
+    width:10px;
+    height:10px;
+    cursor: pointer;
+    color:black;
+}
+
+
 
 /*banner*/
 
@@ -477,6 +834,34 @@
     .login{
         font-size:12px;
     }
+
+    /*location-dropdown*/
+
+    .location-dropdown{
+        padding: 1.5em;
+        border-radius: 35px;
+        width: 85%;
+        top: 53px;
+        left: 8%;
+    }
+
+    /*guest-dropdown*/
+
+    .guest-dropdown {
+        width: 290px;
+        padding: 1.5em 1.5em 0em 1.5em;
+        top: 54px;
+        right: 7.5%;
+        font-size: 14px;
+    }
+
+    .guest-icons {
+        gap: 8px;
+    }
+
+    .plus-minus {
+        padding: 3px;
+    }
     
 
     /*search*/
@@ -698,6 +1083,30 @@
         width: 52px;
     }
 
+    /*location-dropdown*/
+
+    .location-dropdown{
+        width: 60%;
+        top: 60px;
+        left: 8%;
+    }
+
+    /*guest-dropdown*/
+
+    .guest-dropdown {
+        width: 330px;
+        padding: 1.5em 1.5em 0em 1.5em;
+        top: 63px;
+        right: 9.5%;
+    }
+
+    .guest-icons {
+        gap: 9px;
+    }
+
+    .plus-minus {
+        padding: 5px;
+    }
 
 
     /*banner*/
@@ -792,6 +1201,23 @@
     .search{
         padding-top:10px;
         height: 60px;
+    }
+
+    .modal{
+        width:300px;
+        font-size: 1rem;
+    }
+
+    .modal .modal-heading{
+        font-size: 0.8rem;
+    }
+
+    .modal .modal-heading div{
+        font-size: 1.8rem;
+    }
+
+    .modal form button{
+        font-size: 0.8rem;
     }
 
     /*ask*/
@@ -925,6 +1351,12 @@
 
     .links{
         gap:20px;
+    }
+
+    /*location-dropdown*/
+
+    .location-dropdown{
+        left: 10%;
     }
 
     /*ask*/

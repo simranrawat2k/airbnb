@@ -71,16 +71,17 @@ set display: flex on the .shop-flex container and apply align-items: stretch to 
 
 .shop-flex{
     display: flex;
-    align-items: stretch;
     justify-content: space-between;
+    align-items: center;
     padding: 4em 8em;
 }
 
 .card-1, .card-2{
-    width:45%;
-    display: flex; /* Ensure children fill the available space vertically */
-    flex-direction: column;
+    width:45%;   
+    position: relative;
+    
 }
+
 
 .card-1 h1, .card-2 h1{
     font-size: 2rem;
@@ -91,11 +92,8 @@ set display: flex on the .shop-flex container and apply align-items: stretch to 
     background-color: white;
     color:rgb(19,39,54);
     padding:1em;
-    position: relative;
     font-size: 1.2rem;
-    height: 100%;   
-    display: flex; /* Ensure children fill the available space vertically */
-    flex-direction: column;
+    height: 100%;       
     padding-bottom:4em;
 }
 
@@ -126,6 +124,7 @@ set display: flex on the .shop-flex container and apply align-items: stretch to 
     color: rgb(161, 0, 0);
     position:absolute;
     bottom:18px;
+    margin-left:18px;
 }
 
 @media  screen and (min-width: 769px) and (max-width: 1024px) {

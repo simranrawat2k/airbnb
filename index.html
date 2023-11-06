@@ -23,7 +23,7 @@
                 <div class="links">
                     <a href="#">Places to Stay</a>
                     <a href="#discover-title">Experiences</a>
-                    <a href="#">Online Experiences</a>
+                    <a href="#gift-card">Gift Cards</a>
                 </div>
                 <div class="login">
                     Become a Host
@@ -31,58 +31,260 @@
                 </div>
             </div>
         </nav>
+
+        <!--Modal-->
+        <div class="overlay"></div>
+        <div class="modal">
+            <div class="modal-heading">
+                <h2>Welcome to Airbnb</h2>
+                <div>&times;</div>
+            </div>
+
+            <form>
+                <div>
+                    <label for="Name">Enter Your Name</label>
+                    <input type="text" id="nameInput">
+                </div>
+                <button class="modal-save">
+                    Save
+                </button>
+            </form>
+        </div>
+
+
     </header>
     <main class="container">
         <!--Search bar-->
         <section class="search">
             <div class="search-bar">
-                <div class="items">
-                    <div class="heading">
-                        Location
+                <button class="btn location-btn">
+                    <div class="items">
+                        <div class="heading">
+                            Location
+                        </div>
+                        <div class="sub-heading">
+                            Where are you going?
+                        </div>
                     </div>
-                    <div class="sub-heading">
-                        Where are you going?
+                </button>
+                <button class="btn check-in-btn">
+                    <div class="items">
+                        <div class="heading">
+                            Check in
+                        </div>
+                        <div class="sub-heading">
+                            Add dates
+                        </div>
                     </div>
-                </div>
-                <div class="items">
-                    <div class="heading">
-                        Check in
+                </button>
+                <button class="btn check-out-btn">
+                    <div class="items">
+                        <div class="heading">
+                            Check out
+                        </div>
+                        <div class="sub-heading">
+                            Add dates
+                        </div>
                     </div>
-                    <div class="sub-heading">
-                        Add dates
+                </button>
+                <button class="btn guest-btn">
+                    <div>
+                        <div class="heading">
+                            Guests
+                        </div>
+                        <div class="sub-heading">
+                            Add guests
+                        </div>
                     </div>
-                </div>
-                <div class="items">
-                    <div class="heading">
-                        Check out
+                </button>
+                <button class="btn search-btn">
+                    <div class="search-icon">
+                        <i class="fa-solid fa-magnifying-glass fa-xl icon"></i>
                     </div>
-                    <div class="sub-heading">
-                        Add dates
+                </button>
+            </div>
+        </section>
+
+        <!--Dropdowns-->
+        <div class="dropdown">
+            <div class="location-dropdown">
+                <p>Search by region</p>
+                <div class="location-dropdown-flex">
+                    <div>
+                        <img src="https://a0.muscache.com/pictures/f9ec8a23-ed44-420b-83e5-10ff1f071a13.jpg" alt="logo">
+                        <p>I'm flexible</p>
                     </div>
-                </div>
-                <div>
-                    <div class="heading">
-                        Guests
+                    <div>
+                        <img src="https://a0.muscache.com/im/pictures/7b5cf816-6c16-49f8-99e5-cbc4adfd97e2.jpg?im_w=320"
+                            alt="logo">
+                        <p>Europe</p>
                     </div>
-                    <div class="sub-heading">
-                        Add guests
+                    <div>
+                        <img src="https://a0.muscache.com/im/pictures/4e762891-75a3-4fe1-b73a-cd7e673ba915.jpg?im_w=320"
+                            alt="logo">
+                        <p>United States</p>
                     </div>
-                </div>
-                <div class="search-icon">
-                    <i class="fa-solid fa-magnifying-glass fa-xl icon"></i>
+                    <div>
+                        <img src="https://a0.muscache.com/im/pictures/d77de9f5-5318-4571-88c7-e97d2355d20a.jpg?im_w=320"
+                            alt="logo">
+                        <p>Southeast Asia</p>
+                    </div>
+                    <div>
+                        <img src="https://a0.muscache.com/im/pictures/dbb2b5ef-2efe-4099-81ac-c7b957f384ed.jpg?im_w=320"
+                            alt="logo">
+                        <p>United Kingdom</p>
+                    </div>
+                    <div>
+                        <img src="https://a0.muscache.com/im/pictures/cd9f2bf0-eefc-4980-b7cb-9c8ca3dae883.jpg?im_w=320"
+                            alt="logo">
+                        <p>Canada</p>
+                    </div>
                 </div>
             </div>
-        </section> 
+
+
+            <div class="check-in-dropdown">
+                <div class="check-in-calendar">
+                    <div class="check-in-header">
+                        <h2 id="check-in">Month Year</h2>
+                        <div class="check-in-btn">
+                            <button id="check-in-prev">
+                                <i class="fa-solid fa-chevron-left" style="color: #de3151;"></i>
+                            </button>
+                            <button id="check-in-next">
+                                <i class="fa-solid fa-chevron-right" style="color: #de3151;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calender-check-in">
+                    <ul class="check-in-weeks">
+                        <li>Sun</li>
+                        <li>Mon</li>
+                        <li>Tue</li>
+                        <li>Wed</li>
+                        <li>Thu</li>
+                        <li>Fri</li>
+                        <li>Sat</li>
+                    </ul>
+
+                    <ul class="check-in-days">
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <div class="check-out-dropdown">
+                <div class="calendar">
+                    <div class="header">
+                        <h2 id="check-out">Month Year</h2>
+                        <div class="calender-btn">
+                            <button id="prevMonth">
+                                <i class="fa-solid fa-chevron-left" style="color: #de3151;"></i>
+                            </button>
+                            <button id="nextMonth">
+                                <i class="fa-solid fa-chevron-right" style="color: #de3151;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calender-check-out">
+                    <ul class="weeks">
+                        <li>Sun</li>
+                        <li>Mon</li>
+                        <li>Tue</li>
+                        <li>Wed</li>
+                        <li>Thu</li>
+                        <li>Fri</li>
+                        <li>Sat</li>
+                    </ul>
+
+                    <ul class="days">
+                        
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="guest-dropdown">
+                <div class="add-guest">
+                    <div class="guest-name">
+                        <h3>Adults</h3>
+                        <p>Ages 13 or above</p>
+                    </div>
+                    <div class="guest-icons">
+                        <div class="plus-minus adult-minus">
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                        <div class="adult-counter">0</div>
+                        <div class="plus-minus adult-plus">
+                            <i class="fa-solid fa-plus "></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-guest">
+                    <div class="guest-name">
+                        <h3>Children</h3>
+                        <p>Ages 2 to 12</p>
+                    </div>
+                    <div class="guest-icons">
+                        <div class="plus-minus children-minus">
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                        <div class="childer-counter">0</div>
+                        <div class="plus-minus children-plus">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-guest">
+                    <div class="guest-name">
+                        <h3>Infants</h3>
+                        <p>Under 2</p>
+                    </div>
+                    <div class="guest-icons">
+                        <div class="plus-minus infant-minus">
+                            <i class="fa-solid fa-minus "></i>
+                        </div>
+                        <div class="infant-counter">0</div>
+                        <div class="plus-minus infant-plus">
+                            <i class="fa-solid fa-plus "></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-guest">
+                    <div class="guest-name">
+                        <h3>Pets</h3>
+                        <p>Bringing a service animal?</p>
+                    </div>
+                    <div class="guest-icons">
+                        <div class="plus-minus pet-minus">
+                            <i class="fa-solid fa-minus "></i>
+                        </div>
+                        <div class="pet-counter">0</div>
+                        <div class="plus-minus pet-plus">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="check-in-dropdown">
+
+            </div>
+        </div>
 
         <section class="banner">
             <div class="bg-img">
                 <p>
                     Not sure where to go? Perfect!
                 <p>
-                <a href="./search.html">
-                    <button class="flexible">I'm flexible</button>
-                </a>
-                 
+                    <a href="./search.html">
+                        <button class="flexible">I'm flexible</button>
+                    </a>
+
             </div>
         </section>
 
@@ -97,7 +299,7 @@
                     </div>
                     <div class="card-bottom">
                         <h2>Nashville</h2>
-                        <p>53  miles away</p>
+                        <p>53 miles away</p>
                     </div>
                 </div>
                 <div class="card card-two">
@@ -106,7 +308,7 @@
                     </div>
                     <div class="card-bottom">
                         <h2>South Haven</h2>
-                        <p>168  miles away</p>
+                        <p>168 miles away</p>
                     </div>
                 </div>
                 <div class="card card-three">
@@ -115,7 +317,7 @@
                     </div>
                     <div class="card-bottom">
                         <h2>Stanton</h2>
-                        <p>200  miles away</p>
+                        <p>200 miles away</p>
                     </div>
                 </div>
                 <div class="card card-four">
@@ -128,7 +330,7 @@
                     </div>
                 </div>
             </div>
-        </section>  
+        </section>
 
         <section class="sectionFour">
             <div class="discover-title" id="discover-title">
@@ -141,7 +343,7 @@
                         <p>
                             Things to do on your trip
                         </p>
-                        <a href="./experience.html">
+                        <a href="./page3.html">
                             <button>
                                 Experiences
                             </button>
@@ -164,7 +366,7 @@
             </div>
         </section>
 
-        <section class="gift-card">
+        <section class="gift-card" id="gift-card">
             <div class="gift-title">
                 <p>Shop Airbnb gift cards</p>
                 <a href="./shop.html">
@@ -229,7 +431,7 @@
                 <div class="footer-list">
                     <div class="footer-copyright">
                         <div>
-                            &copy 2022 Airbnb, Inc. 
+                            &copy 2022 Airbnb, Inc.
                         </div>
                         <div>
                             <a href="#">Privacy</a>
