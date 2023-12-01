@@ -5,7 +5,11 @@
     padding: 0px;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+}
+
+html{
     scroll-behavior: smooth;
+    scroll-padding: 85px ;
 }
 
 :root{
@@ -77,7 +81,7 @@
     height:100vh;
     background-color: hsla(0, 0%, 0%, 0.54);
     z-index:200;
-    position:absolute;
+    position:fixed;
     transition: 0.5s;
     display: none;
 }
@@ -87,7 +91,7 @@
 }
 
 .modal{
-    position:absolute;
+    position:fixed;
     z-index: 300;
     background-color: white;
     top:-50%;
@@ -275,7 +279,11 @@
     top: 74px;
     left: 30%;
     border-radius: 20px;
-    display: block;
+    display: none;
+}
+
+.show-check-in{
+    display:block;
 }
 
 .check-in-calendar {
@@ -354,6 +362,10 @@
     left: 46%;
     border-radius: 20px;
     display: none;
+}
+
+.show-check-out{
+    display:block;
 }
 
 
@@ -845,6 +857,42 @@
         left: 8%;
     }
 
+    /*check-in-dropdown*/
+
+    .dropdown .check-in-dropdown {
+        width: 283px;
+        top:55px;
+        left:10%;
+        font-size: 14px;
+    }
+
+    .dropdown .calender-check-in .check-in-weeks li {
+        width: 38px;
+        padding: 3px;
+    }
+
+    .dropdown .calender-check-in ul li {
+        width: 38px;
+        padding: 5px;
+    }
+
+    .dropdown .check-out-dropdown {
+        width: 290px;
+        top: 55px;
+        left: 8%;
+        font-size: 14px;
+    }
+
+    .dropdown .calender-check-out .weeks li {
+        width: 40px;
+        padding: 3px;
+    }
+
+    .dropdown .calender-check-out ul li {
+        width: 40px;
+        padding: 5px;
+    }
+
     /*guest-dropdown*/
 
     .guest-dropdown {
@@ -1220,6 +1268,68 @@
         font-size: 0.8rem;
     }
 
+    .check-in-dropdown {
+        width: 315px;
+        top: 61px;
+        left: 28%;
+    }
+
+    .check-in-calendar {
+        margin: 15px 14px 0px 6px;
+        font-size: 12px;
+    }
+
+    #check-in-prev, #check-in-next {
+        font-size: 11px;
+        width: 25px;
+        height: 25px;
+    }
+
+    .calender-check-in {
+        padding: 0px 5px 12px 5px;
+    }
+
+    .calender-check-in .check-in-weeks li {
+        width: 43px;
+    }
+
+    .calender-check-in ul li {
+        width: 43px;
+    }
+
+    .check-out-dropdown {
+        width: 315px;
+        top: 65px;
+        left: 30%;
+    }
+
+    .calendar {
+        margin: 15px 14px 0px 6px;
+    }
+
+    #check-out{
+        font-size: 18px;
+    }
+
+    #prevMonth, #nextMonth {
+        font-size: 11px;
+        width: 25px;
+        height: 25px;
+    }
+
+    .calender-check-out {
+        padding: 0px 5px 12px 5px;
+    }
+
+    .calender-check-out .weeks li {
+        width: 43px;
+        padding: 6px;
+    }
+
+    .calender-check-out ul li {
+        width: 43px;
+    }
+
     /*ask*/
 
     .ask{
@@ -1290,6 +1400,16 @@
         width: 82%;
         height: 56px;
         padding: 8px 16px 4px 28px;
+    }
+
+    .dropdown .check-in-dropdown{
+        top:60px;
+    }
+
+    .dropdown .check-out-dropdown {
+        width: 370px;
+        top: 60px;
+        left: 35%;
     }
     
     

@@ -31,22 +31,28 @@ nav {
     background-color: rgb(247,247,247);
 }
 
+.container h1{
+    text-align: center;
+    padding: 2rem;
+}
+
 .clock{
     width:85%;
     margin-inline: auto;
-    height:91vh;
     display:flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 50px;
 }
 
 .clock .clock-border{
     border:2px solid rgb(19,39,54);
     width:100%;
-    height:70vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 2rem;
+    padding: 2em 1em 2em 1em;
 }
 
 .clock .image img{
@@ -56,7 +62,37 @@ nav {
 
 .clock-border .image{
     text-align: center;
-    padding-left: 2em;
+}
+
+.expired{
+    color:rgb(165, 0, 0);
+}
+
+.date .deadline{
+    display:flex;
+    gap:1.5rem;
+}
+
+.deadline-format div{
+    background-color: rgb(19,39,54);
+    color:white;
+    padding:10px;
+    text-align: center;
+    width:80px;
+}
+
+.deadline-format div h4{
+    font-size: 25px;
+}
+
+.date .offer{
+    font-size:1.8rem;
+    padding-bottom:20px;
+}
+
+.date p{
+    padding-bottom:18px;
+    font-size: 20px;
 }
 
 .shop-card{
@@ -64,16 +100,11 @@ nav {
     color:white;
 }
 
-/*
-set display: flex on the .shop-flex container and apply align-items: stretch to make the columns equal in height.
- set display: flex on the .shop-text-1 and .shop-text-2 divs to ensure that their children fill the available space.
-*/
-
 .shop-flex{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4em 8em;
+    padding: 1em 8em 3em 8em;
 }
 
 .card-1, .card-2{
@@ -128,24 +159,21 @@ set display: flex on the .shop-flex container and apply align-items: stretch to 
 }
 
 @media  screen and (min-width: 769px) and (max-width: 1024px) {
+
+    .clock{
+        width:95%;
+    }
+
+    .clock .image img {
+        height: 300px;
+    }
+
     .shop-flex{
         padding-inline: 2em;
     }
 
     .card-1, .card-2{
         width:47%;
-    }
-}
-
-@media  screen and (min-width: 320px) and (max-width: 768px) {
-    .shop-flex{
-        display:block;
-        padding: 4em 5em 1em 5em;
-    }
-
-    .card-1, .card-2{
-        width:100%;
-        margin-bottom:4em;
     }
 }
 
@@ -156,3 +184,62 @@ set display: flex on the .shop-flex container and apply align-items: stretch to 
     }
 
 }
+
+@media  screen and (min-width: 320px) and (max-width: 768px) {
+
+    .clock-border .image {
+        display: none;
+    }
+
+    .deadline{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .date .offer {
+        font-size: 1.5rem;
+    }
+
+    .date p {
+        font-size: 16px;
+    }
+
+    .date .deadline {
+        gap: 0.5rem;
+    }
+
+    .deadline-format div {
+        padding: 5px;
+        width: 55px;
+    }
+
+    .deadline-format div h4 {
+        font-size: 20px;
+    }
+
+    .deadline-format div span{
+        font-size:12px;
+    }
+
+
+    .shop-flex{
+        display:block;
+        padding: 0em 3em 1em 3em;
+    }
+
+    .card-1, .card-2{
+        width:100%;
+        margin-bottom:4em;
+    }
+
+    .shop-text-1, .shop-text-2 {
+        font-size: 1rem;
+    }
+
+    .btn-container .buy-now {
+        font-size: 1rem;
+    }
+}
+
+

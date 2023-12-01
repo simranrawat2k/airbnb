@@ -80,6 +80,9 @@ const locationDropdown = document.querySelector(".location-dropdown");
 locationBtn.addEventListener("click", (event) => {
   event.stopPropagation(); // Prevent event propagation
   locationDropdown.classList.toggle("showLocationDropdown");
+  checkInDropdown.classList.remove("show-check-in");
+  checkOutDropdown.classList.remove("show-check-out");
+  guestDropdown.classList.remove("showGuestDropdown");
 });
 
 // Add a click event listener to the document
@@ -139,7 +142,7 @@ const renderCalenderCheckIn = () => {
       isTodayCheckIn = "activeCheckIn";
     }
   
-    liTagCheckIn += `<li class="${isTodayCheckIn}">${i}</li>`;
+    liTagCheckIn += `<li class="${isTodayCheckIn} date-item" data-year="${currYearCheckIn}" data-month="${monthsCheckIn[currMonthCheckIn]}">${i}</li>`;
   }
   
   currentCheckInDate.innerText = `${monthsCheckIn[currMonthCheckIn]} ${currYearCheckIn}`;
@@ -147,6 +150,29 @@ const renderCalenderCheckIn = () => {
 }
 
 renderCalenderCheckIn();
+
+/*get date on clicking calender*/
+
+const selectedDate = document.querySelector(".check-in-btn .items .heading");
+
+const handleDateClick = (event) => {
+  const clickedDate = event.target.innerText;
+  const clickedYear = event.target.getAttribute("data-year");
+  const clickedMonth = event.target.getAttribute("data-month");
+  
+  selectedDate.innerText = `${clickedDate} ${clickedMonth} ${clickedYear}`;
+}
+
+daysCheckInTag.addEventListener('click', (event) => {
+  if (event.target.classList.contains('date-item')) {
+    handleDateClick(event);
+  }
+});
+
+
+
+  
+
 
 // Event listener for previous month button
 document.getElementById('check-in-prev').addEventListener('click', () => {
@@ -174,6 +200,25 @@ document.getElementById('check-in-next').addEventListener('click', () => {
   }
   renderCalenderCheckIn();
 });
+
+/*show check-in dropdown*/
+const checkInBtn = document.querySelector(".search .check-in-btn")
+const checkInDropdown = document.querySelector(".check-in-dropdown");
+
+checkInBtn.addEventListener("click",(event)=>{
+  event.stopPropagation();
+  checkInDropdown.classList.toggle("show-check-in");
+  locationDropdown.classList.remove("showLocationDropdown");
+  checkOutDropdown.classList.remove("show-check-out");
+  guestDropdown.classList.remove("showGuestDropdown");
+});
+
+document.addEventListener("click", (event) => {
+  if (!checkInDropdown.contains(event.target)) {
+    checkInDropdown.classList.remove("show-check-in");
+  }
+});
+
 
 
 /******displaying check-out dropdown*******/
@@ -208,7 +253,7 @@ const renderCalender = () => {
       isToday = "active";
     }
   
-    liTag += `<li class="${isToday}">${i}</li>`;
+    liTag += `<li class="${isToday} date-item" data-year="${currYear}" data-month="${months[currMonth]}">${i}</li>`;
   }
   
   currentDate.innerText = `${months[currMonth]} ${currYear}`;
@@ -242,6 +287,43 @@ document.getElementById('nextMonth').addEventListener('click', () => {
     date = new Date();
   }
   renderCalender();
+});
+
+/*get date on clicking calender*/
+
+const selectedCheckOut = document.querySelector(".check-out-btn .items .heading");
+
+const checkOutDateClick = (event) => {
+  const clickedDate = event.target.innerText;
+  const clickedYear = event.target.getAttribute("data-year");
+  const clickedMonth = event.target.getAttribute("data-month");
+  
+  selectedCheckOut.innerText = `${clickedDate} ${clickedMonth} ${clickedYear}`;
+}
+
+daysTag.addEventListener('click', (event) => {
+  if (event.target.classList.contains('date-item')) {
+   checkOutDateClick(event);
+  }
+});
+
+
+/*show check-out dropdown*/
+const checkOutBtn = document.querySelector(".search .check-out-btn")
+const checkOutDropdown = document.querySelector(".check-out-dropdown");
+
+checkOutBtn.addEventListener("click",(event)=>{
+  event.stopPropagation();
+  checkOutDropdown.classList.toggle("show-check-out");
+  locationDropdown.classList.remove("showLocationDropdown");
+  checkInDropdown.classList.remove("show-check-in");
+  guestDropdown.classList.remove("showGuestDropdown");
+});
+
+document.addEventListener("click", (event) => {
+  if (!checkOutDropdown.contains(event.target)) {
+    checkOutDropdown.classList.remove("show-check-out");
+  }
 });
 
 
