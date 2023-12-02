@@ -223,6 +223,50 @@ html{
 
 /*dropdown*/
 
+/*sign-in and sing-out*/
+
+header .singInOut{
+    display: block;
+    background-color: white;
+    /*padding-top: 20px;
+    padding-bottom: 20px;*/
+    border-radius: 12px;
+    position: fixed;
+    z-index: 100;
+    top: 57px;
+    right: 47px;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease; 
+}
+
+header .singInOut.visible {
+    height: 138px;
+}
+
+
+header .singInOut .help a{
+    color:black;
+    text-decoration: none;
+}
+
+header .singInOut .login{
+    cursor: pointer;
+    padding:20px;
+}
+
+header .singInOut .logout{
+    cursor: pointer;
+    border-bottom: 2px solid rgb(185, 185, 185);
+    padding: 0px 20px 10px 20px;
+}
+
+header .singInOut .help{
+    padding: 10px 20px 0px 20px;
+}
+
+
+
 /*Location-dropdown*/
 
 .location-dropdown{
@@ -847,6 +891,13 @@ html{
         font-size:12px;
     }
 
+    /*sign-in*/
+    header .singInOut{
+        right: 17px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
     /*location-dropdown*/
 
     .location-dropdown{
@@ -1129,6 +1180,11 @@ html{
 
     .nav-content .login img {
         width: 52px;
+    }
+
+    /*sign-in*/
+    header .singInOut{
+        right: 17px;
     }
 
     /*location-dropdown*/
@@ -1471,6 +1527,11 @@ html{
 
     .links{
         gap:20px;
+    }
+
+    /*sign-in*/
+    header .singInOut{
+        right: 17px;
     }
 
     /*location-dropdown*/

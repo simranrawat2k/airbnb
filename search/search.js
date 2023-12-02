@@ -1,4 +1,4 @@
-async function fetchData() {
+/*async function fetchData() {
   const url = "https://airbnb13.p.rapidapi.com/search-location?location=delhi&checkin=2024-01-16&checkout=2024-01-28&adults=1&children=0&infants=0&pets=0&page=1&currency=USD";
   const options = {
     method: "GET",
@@ -16,7 +16,7 @@ async function fetchData() {
     console.error(error);
   }
 }
-
 fetchData();
+*/
 
 

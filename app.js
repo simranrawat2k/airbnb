@@ -1,16 +1,80 @@
-/*****************Show Modal *********************/
+/****************Get data from Local Storage ****************/
 
-const overlay = document.querySelector(".overlay")
-const modal = document.querySelector(".modal");
-const loginBtn = document.querySelector(".nav-content .login img");
-const nameInput = document.getElementById("nameInput");
+const headingElement = document.querySelector(".items .heading");
+const selectedDate = document.querySelector(".check-in-btn .items .heading");
+const selectedCheckOut = document.querySelector(
+  ".check-out-btn .items .heading"
+);
+const GuestHeading = document.querySelector(".guest-btn .heading");
 
-loginBtn.addEventListener("click", ()=>{
-  overlay.classList.toggle("showOverlay");
-  modal.classList.toggle("showModal");
+var adultCounter = document.querySelector(".adult-counter");
+var childerCounter = document.querySelector(".childer-counter");
+var infantCounter = document.querySelector(".infant-counter");
+var petCounter = document.querySelector(".pet-counter");
+
+var total = 0;
+var adults = 0;
+var children = 0;
+var infant = 0;
+var pet = 0;
+
+let item = JSON.parse(localStorage.getItem("list")) || [];
+document.addEventListener("DOMContentLoaded", () => {
+  if (item.length > 0) {
+    headingElement.textContent = item[0];
+    paragraphText = headingElement.textContent;
+    selectedDate.innerText = item[1].join(" ");
+    selectedCheckOut.innerText = item[2].join(" ");
+
+    total = item[3][0];
+    adults = item[3][1];
+    children = item[3][2];
+    infant = item[3][3];
+    pet = item[3][4];
+
+    adultCounter.textContent = adults;
+    childerCounter.textContent = children;
+    infantCounter.textContent = infant;
+    petCounter.textContent = pet;
+
+    if (total === 1) {
+      GuestHeading.textContent = total + " Guest";
+    } else {
+      GuestHeading.textContent = total + " Guests";
+    }
+  } else {
+  }
 });
 
-function closeModal(){
+/***************** Show logIn ********************/
+
+const loginIcon = document.querySelector(".nav-content .login img");
+const singInOut = document.querySelector("header .singInOut");
+const singout = document.querySelector("header .singInOut .logout");
+
+loginIcon.addEventListener("click", () => {
+  singInOut.classList.toggle("visible");
+});
+
+
+
+
+/*****************Show Modal *********************/
+
+const overlay = document.querySelector(".overlay");
+const modal = document.querySelector(".modal");
+const loginBtn = document.querySelector(".singInOut .login");
+const nameInput = document.getElementById("nameInput");
+
+loginBtn.addEventListener("click", () => {
+  overlay.classList.toggle("showOverlay");
+  modal.classList.toggle("showModal");
+  singInOut.classList.remove("visible");
+  nameInput.value = "";
+  
+});
+
+function closeModal() {
   overlay.classList.remove("showOverlay");
   modal.classList.remove("showModal");
 }
@@ -18,32 +82,36 @@ function closeModal(){
 const crossIcon = document.querySelector(".modal .modal-heading div");
 const modalSave = document.querySelector(".modal form button");
 
-crossIcon.addEventListener("click", ()=>{
+crossIcon.addEventListener("click", () => {
   closeModal();
-  const userInput = nameInput.value;
-  showletters(userInput);
+  //const userInput = nameInput.value;
+ // showletters(userInput);
 });
 
-modalSave.addEventListener("click", (e)=>{
+modalSave.addEventListener("click", (e) => {
   e.preventDefault();
-  closeModal();
   const userInput = nameInput.value;
+  if(userInput==""){
+    alert("Please add name or click on close sign")
+    return;
+  }
   showletters(userInput);
+  closeModal();
 });
 
-overlay.addEventListener("click", ()=> {
+overlay.addEventListener("click", () => {
   closeModal();
-  const userInput = nameInput.value;
-  showletters(userInput);
+  //const userInput = nameInput.value;
+  //showletters(userInput);
 });
 
-function showletters(userInput){
+function showletters(userInput) {
   var initials = "";
-  const wordArray = userInput.split(' ');
-  if(wordArray.lenght === 0){
-  } else if(wordArray.lenght === 1){
+  const wordArray = userInput.split(" ");
+  if (wordArray.length === 0) {
+  } else if (wordArray.length === 1) {
     initials = wordArray[0][0];
-  }else{
+  } else {
     initials = wordArray[0][0] + wordArray[1][0];
   }
 
@@ -53,22 +121,25 @@ function showletters(userInput){
 const login = document.querySelector(".nav-content .login");
 const divElement = document.createElement("div");
 divElement.className = "addInitial";
+const navContent = document.querySelector(".nav-content");
 
-function displayInitials(initials){
+function displayInitials(initials) {
   login.classList.add("hideLogin");
-
   divElement.textContent = initials; 
-
-  const navContent = document.querySelector(".nav-content");
   navContent.appendChild(divElement);
-
 }
 
-divElement.addEventListener("click", ()=>{
-  overlay.classList.toggle("showOverlay");
-  modal.classList.toggle("showModal");
-  nameInput.value = "";
+divElement.addEventListener("click", () => {
+  singInOut.classList.add("visible");////////////////////////////////////////////////////////
 });
+
+document.addEventListener("click", (event) => {
+  if ((!loginIcon.contains(event.target)) && (!divElement.contains(event.target))) {
+    singInOut.classList.remove("visible");
+  }
+});
+
+
 
 
 /*******displaying location dropdown*********/
@@ -83,6 +154,7 @@ locationBtn.addEventListener("click", (event) => {
   checkInDropdown.classList.remove("show-check-in");
   checkOutDropdown.classList.remove("show-check-out");
   guestDropdown.classList.remove("showGuestDropdown");
+  singInOut.classList.remove("visible");
 });
 
 // Add a click event listener to the document
@@ -104,7 +176,7 @@ imglocationDropdownFlex.forEach((img) => {
     const paragraph = img.nextElementSibling;
     paragraphText = paragraph.textContent;
 
-    const headingElement = document.querySelector(".items .heading");
+    //const headingElement = document.querySelector(".items .heading");
     if (headingElement) {
       headingElement.textContent = paragraphText;
     }
@@ -114,74 +186,101 @@ imglocationDropdownFlex.forEach((img) => {
 /*******displaying check-in dropdown*********/
 
 const currentCheckInDate = document.getElementById("check-in");
-const daysCheckInTag = document.querySelector(".calender-check-in .check-in-days");
+const daysCheckInTag = document.querySelector(
+  ".calender-check-in .check-in-days"
+);
 
 let dateCheckIn = new Date();
 let currYearCheckIn = dateCheckIn.getFullYear();
 let currMonthCheckIn = dateCheckIn.getMonth();
 
-const monthsCheckIn = ["Jan", "Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug" , "Sep", "Oct", "Nov", "Dec"];
+const monthsCheckIn = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 const renderCalenderCheckIn = () => {
-  let firstDayofMonthCheckIn = new Date(currYearCheckIn, currMonthCheckIn, 1).getDay();
-  let lastDateofMonthCheckIn = new Date(currYearCheckIn, currMonthCheckIn + 1, 0).getDate();
+  let firstDayofMonthCheckIn = new Date(
+    currYearCheckIn,
+    currMonthCheckIn,
+    1
+  ).getDay();
+  let lastDateofMonthCheckIn = new Date(
+    currYearCheckIn,
+    currMonthCheckIn + 1,
+    0
+  ).getDate();
   let liTagCheckIn = "";
 
-  for(let i = firstDayofMonthCheckIn; i>0; i--){
-    liTagCheckIn +=`<li></li>`
+  for (let i = firstDayofMonthCheckIn; i > 0; i--) {
+    liTagCheckIn += `<li></li>`;
   }
 
   for (let i = 1; i <= lastDateofMonthCheckIn; i++) {
     let isTodayCheckIn = "";
-  
-    if (currYearCheckIn < new Date().getFullYear() ||
-        (currYearCheckIn === new Date().getFullYear() && currMonthCheckIn < new Date().getMonth()) ||
-        (currYearCheckIn === new Date().getFullYear() && currMonthCheckIn === new Date().getMonth() && i < new Date().getDate())) {
+
+    if (
+      currYearCheckIn < new Date().getFullYear() ||
+      (currYearCheckIn === new Date().getFullYear() &&
+        currMonthCheckIn < new Date().getMonth()) ||
+      (currYearCheckIn === new Date().getFullYear() &&
+        currMonthCheckIn === new Date().getMonth() &&
+        i < new Date().getDate())
+    ) {
       isTodayCheckIn = "inactiveCheckIn";
-    } else if (currYearCheckIn === new Date().getFullYear() && currMonthCheckIn === new Date().getMonth() && i ===  dateCheckIn.getDate()) {
+    } else if (
+      currYearCheckIn === new Date().getFullYear() &&
+      currMonthCheckIn === new Date().getMonth() &&
+      i === dateCheckIn.getDate()
+    ) {
       isTodayCheckIn = "activeCheckIn";
     }
-  
+
     liTagCheckIn += `<li class="${isTodayCheckIn} date-item" data-year="${currYearCheckIn}" data-month="${monthsCheckIn[currMonthCheckIn]}">${i}</li>`;
   }
-  
+
   currentCheckInDate.innerText = `${monthsCheckIn[currMonthCheckIn]} ${currYearCheckIn}`;
   daysCheckInTag.innerHTML = liTagCheckIn;
-}
+};
 
 renderCalenderCheckIn();
 
 /*get date on clicking calender*/
 
-const selectedDate = document.querySelector(".check-in-btn .items .heading");
+//const selectedDate = document.querySelector(".check-in-btn .items .heading");
 
 const handleDateClick = (event) => {
   const clickedDate = event.target.innerText;
   const clickedYear = event.target.getAttribute("data-year");
   const clickedMonth = event.target.getAttribute("data-month");
-  
-  selectedDate.innerText = `${clickedDate} ${clickedMonth} ${clickedYear}`;
-}
 
-daysCheckInTag.addEventListener('click', (event) => {
-  if (event.target.classList.contains('date-item')) {
+  selectedDate.innerText = `${clickedDate} ${clickedMonth} ${clickedYear}`;
+};
+
+daysCheckInTag.addEventListener("click", (event) => {
+  if (event.target.classList.contains("date-item")) {
     handleDateClick(event);
   }
 });
 
-
-
-  
-
-
 // Event listener for previous month button
-document.getElementById('check-in-prev').addEventListener('click', () => {
+document.getElementById("check-in-prev").addEventListener("click", () => {
   currMonthCheckIn = currMonthCheckIn - 1;
-  if(currMonthCheckIn < 0 ){
+  if (currMonthCheckIn < 0) {
     dateCheckIn = new Date(currYearCheckIn, currMonthCheckIn);
     currYearCheckIn = dateCheckIn.getFullYear();
     currMonthCheckIn = dateCheckIn.getMonth();
-  }else{
+  } else {
     dateCheckIn = new Date();
   }
 
@@ -189,28 +288,29 @@ document.getElementById('check-in-prev').addEventListener('click', () => {
 });
 
 // Event listener for next month button
-document.getElementById('check-in-next').addEventListener('click', () => {
+document.getElementById("check-in-next").addEventListener("click", () => {
   currMonthCheckIn = currMonthCheckIn + 1;
-  if(currMonthCheckIn > 11 ){
+  if (currMonthCheckIn > 11) {
     dateCheckIn = new Date(currYearCheckIn, currMonthCheckIn);
     currYearCheckIn = dateCheckIn.getFullYear();
     currMonthCheckIn = dateCheckIn.getMonth();
-  }else{
+  } else {
     dateCheckIn = new Date();
   }
   renderCalenderCheckIn();
 });
 
 /*show check-in dropdown*/
-const checkInBtn = document.querySelector(".search .check-in-btn")
+const checkInBtn = document.querySelector(".search .check-in-btn");
 const checkInDropdown = document.querySelector(".check-in-dropdown");
 
-checkInBtn.addEventListener("click",(event)=>{
+checkInBtn.addEventListener("click", (event) => {
   event.stopPropagation();
   checkInDropdown.classList.toggle("show-check-in");
   locationDropdown.classList.remove("showLocationDropdown");
   checkOutDropdown.classList.remove("show-check-out");
   guestDropdown.classList.remove("showGuestDropdown");
+  singInOut.classList.remove("visible");
 });
 
 document.addEventListener("click", (event) => {
@@ -218,8 +318,6 @@ document.addEventListener("click", (event) => {
     checkInDropdown.classList.remove("show-check-in");
   }
 });
-
-
 
 /******displaying check-out dropdown*******/
 
@@ -231,45 +329,67 @@ let date = new Date();
 let currYear = date.getFullYear();
 let currMonth = date.getMonth();
 
-const months = ["Jan", "Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug" , "Sep", "Oct", "Nov", "Dec"];
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 const renderCalender = () => {
   let firstDayofMonth = new Date(currYear, currMonth, 1).getDay();
-  let lastDateofMonth = new Date(currYear, currMonth+1, 0).getDate();
+  let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate();
   let liTag = "";
 
-  for(let i = firstDayofMonth; i>0; i--){
-    liTag +=`<li></li>`
+  for (let i = firstDayofMonth; i > 0; i--) {
+    liTag += `<li></li>`;
   }
 
   for (let i = 1; i <= lastDateofMonth; i++) {
     let isToday = "";
-  
-    if (currYear < new Date().getFullYear() ||
-        (currYear === new Date().getFullYear() && currMonth < new Date().getMonth()) ||
-        (currYear === new Date().getFullYear() && currMonth === new Date().getMonth() && i < new Date().getDate())) {
+
+    if (
+      currYear < new Date().getFullYear() ||
+      (currYear === new Date().getFullYear() &&
+        currMonth < new Date().getMonth()) ||
+      (currYear === new Date().getFullYear() &&
+        currMonth === new Date().getMonth() &&
+        i < new Date().getDate())
+    ) {
       isToday = "inactive";
-    } else if (currYear === new Date().getFullYear() && currMonth === new Date().getMonth() && i ===  date.getDate()) {
+    } else if (
+      currYear === new Date().getFullYear() &&
+      currMonth === new Date().getMonth() &&
+      i === date.getDate()
+    ) {
       isToday = "active";
     }
-  
+
     liTag += `<li class="${isToday} date-item" data-year="${currYear}" data-month="${months[currMonth]}">${i}</li>`;
   }
-  
+
   currentDate.innerText = `${months[currMonth]} ${currYear}`;
   daysTag.innerHTML = liTag;
-}
+};
 
 renderCalender();
 
 // Event listener for previous month button
-document.getElementById('prevMonth').addEventListener('click', () => {
+document.getElementById("prevMonth").addEventListener("click", () => {
   currMonth = currMonth - 1;
-  if(currMonth < 0 ){
+  if (currMonth < 0) {
     date = new Date(currYear, currMonth);
     currYear = date.getFullYear();
     currMonth = date.getMonth();
-  }else{
+  } else {
     date = new Date();
   }
 
@@ -277,13 +397,13 @@ document.getElementById('prevMonth').addEventListener('click', () => {
 });
 
 // Event listener for next month button
-document.getElementById('nextMonth').addEventListener('click', () => {
+document.getElementById("nextMonth").addEventListener("click", () => {
   currMonth = currMonth + 1;
-  if(currMonth > 11 ){
+  if (currMonth > 11) {
     date = new Date(currYear, currMonth);
     currYear = date.getFullYear();
     currMonth = date.getMonth();
-  }else{
+  } else {
     date = new Date();
   }
   renderCalender();
@@ -291,33 +411,31 @@ document.getElementById('nextMonth').addEventListener('click', () => {
 
 /*get date on clicking calender*/
 
-const selectedCheckOut = document.querySelector(".check-out-btn .items .heading");
-
 const checkOutDateClick = (event) => {
   const clickedDate = event.target.innerText;
   const clickedYear = event.target.getAttribute("data-year");
   const clickedMonth = event.target.getAttribute("data-month");
-  
-  selectedCheckOut.innerText = `${clickedDate} ${clickedMonth} ${clickedYear}`;
-}
 
-daysTag.addEventListener('click', (event) => {
-  if (event.target.classList.contains('date-item')) {
-   checkOutDateClick(event);
+  selectedCheckOut.innerText = `${clickedDate} ${clickedMonth} ${clickedYear}`;
+};
+
+daysTag.addEventListener("click", (event) => {
+  if (event.target.classList.contains("date-item")) {
+    checkOutDateClick(event);
   }
 });
 
-
 /*show check-out dropdown*/
-const checkOutBtn = document.querySelector(".search .check-out-btn")
+const checkOutBtn = document.querySelector(".search .check-out-btn");
 const checkOutDropdown = document.querySelector(".check-out-dropdown");
 
-checkOutBtn.addEventListener("click",(event)=>{
+checkOutBtn.addEventListener("click", (event) => {
   event.stopPropagation();
   checkOutDropdown.classList.toggle("show-check-out");
   locationDropdown.classList.remove("showLocationDropdown");
   checkInDropdown.classList.remove("show-check-in");
   guestDropdown.classList.remove("showGuestDropdown");
+  singInOut.classList.remove("visible");
 });
 
 document.addEventListener("click", (event) => {
@@ -325,7 +443,6 @@ document.addEventListener("click", (event) => {
     checkOutDropdown.classList.remove("show-check-out");
   }
 });
-
 
 /*******displaying guest dropdown*********/
 
@@ -336,6 +453,7 @@ const guestBtn = document.querySelector(".guest-btn");
 guestBtn.addEventListener("click", (event) => {
   //event.stopPropagation();
   guestDropdown.classList.toggle("showGuestDropdown");
+  singInOut.classList.remove("visible");
 });
 
 // Add a click event listener to the document to handle clicks outside the guestDropdown
@@ -351,13 +469,6 @@ document.addEventListener("click", (event) => {
 
 //counter
 
-var total = 0;
-var adults = 0;
-var children = 0;
-var infant = 0;
-var pet = 0;
-
-const GuestHeading = document.querySelector(".guest-btn .heading");
 
 var adultMinusIcons = document.getElementsByClassName("adult-minus")[0];
 var adultPlusIcons = document.getElementsByClassName("adult-plus")[0];
@@ -370,11 +481,6 @@ var infantPlusIcons = document.querySelector(".infant-plus");
 
 var petMinusIcons = document.querySelector(".pet-minus");
 var petPlusIcons = document.querySelector(".pet-plus");
-
-var adultCounter = document.querySelector(".adult-counter");
-var childerCounter = document.querySelector(".childer-counter");
-var infantCounter = document.querySelector(".infant-counter");
-var petCounter = document.querySelector(".pet-counter");
 
 adultPlusIcons.addEventListener("click", () => {
   adults++;
@@ -497,6 +603,108 @@ petMinusIcons.addEventListener("click", () => {
   }
 });
 
+/*i'm flexible */
 
-/*******displaying check-in dropdown*********/
+const flexibleIcon = document.querySelector(".banner .bg-img a");
+flexibleIcon.addEventListener("click", {});
+/*search icon*/
 
+const searchBtn = document.querySelector(".search .search-btn");
+
+searchBtn.addEventListener("click", () => {
+  if (paragraphText === "") {
+    alert("Please add the Location");
+  } else if (selectedDate.textContent === "Check in") {
+    alert("Please add check in date");
+  } else if (selectedCheckOut.textContent === "Check out") {
+    alert("Please add check out date");
+  } else if (total === 0) {
+    alert("Please add number of Guests");
+  } else {
+    //check-in time
+    let i = 0;
+    let a = selectedDate.textContent;
+
+    let arrCheckIn = a.split(" ");
+    let arrMonth;
+    let arrDate = parseInt(arrCheckIn[0], 10);
+    months.forEach((x) => {
+      if (x === arrCheckIn[1]) {
+        arrMonth = i;
+      } else {
+        i++;
+      }
+    });
+    let arrYear = parseInt(arrCheckIn[2], 10);
+
+    let confirmIn = new Date(arrYear, arrMonth, arrDate);
+    let verifyIn = confirmIn.getTime();
+
+    //check-out time
+    let j = 0;
+    let b = selectedCheckOut.textContent;
+
+    let brrCheckIn = b.split(" ");
+    let brrMonth;
+    let brrDate = parseInt(brrCheckIn[0], 10);
+    months.forEach((x) => {
+      if (x === brrCheckIn[1]) {
+        brrMonth = j;
+      } else {
+        j++;
+      }
+    });
+    let brrYear = parseInt(brrCheckIn[2], 10);
+    let confirmOut = new Date(brrYear, brrMonth, brrDate);
+    let verifyOut = confirmOut.getTime();
+
+    /*Confirm dates*/
+    let todaysDate = new Date();
+    let todaysTime = todaysDate.getTime();
+    if (todaysTime > verifyIn || todaysTime > verifyOut) {
+      alert("Past Dates not allowed");
+      return;
+    }
+    if (verifyIn > verifyOut) {
+      alert("Check-in date must be greater than Check-out date");
+      return;
+    }
+
+    /*local storage*/
+    localStorage.removeItem("list");
+    item = [];
+    item.push(paragraphText);
+    item.push(arrCheckIn);
+    item.push(brrCheckIn);
+    item.push([total, adults, children, infant, pet]);
+    localStorage.setItem("list", JSON.stringify(item));
+
+    const nextPage = document.getElementById("nextPage");
+
+    nextPage.href = "./search/search.html";
+  }
+});
+
+singout.addEventListener("click", () => {
+  localStorage.clear();
+  total = 0;
+  adults = 0;
+  children = 0;
+  infant = 0;
+  pet = 0;
+  GuestHeading.textContent = "Guests";
+  headingElement.textContent = "Location";
+  paragraphText = "";
+  selectedDate.innerText = "Check in";
+  selectedCheckOut.innerText = "Check out";
+  adultCounter.textContent = 0;
+  childerCounter.textContent = 0;
+  infantCounter.textContent = 0;
+  petCounter.textContent = 0;
+  login.classList.remove("hideLogin");
+  if(divElement.textContent){
+    divElement.textContent = "";
+    navContent.removeChild(divElement);
+  }
+  singInOut.classList.remove("visible");
+});

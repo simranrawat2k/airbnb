@@ -32,6 +32,18 @@
             </div>
         </nav>
 
+        <div class="singInOut">
+            <div class="login">
+                <p>Log in</p>
+            </div>
+            <div class="logout">
+                <p>Log out</p>
+            </div>
+            <div class="help">
+                <a href="./question/question.html">Help Centre</a>
+            </div>
+        </div>
+
         <!--Modal-->
         <div class="overlay"></div>
         <div class="modal">
@@ -42,7 +54,7 @@
 
             <form>
                 <div>
-                    <label for="Name">Enter Your Name</label>
+                    <label for="Name">Register Your Name</label>
                     <input type="text" id="nameInput">
                 </div>
                 <button class="modal-save">
@@ -50,7 +62,6 @@
                 </button>
             </form>
         </div>
-
 
     </header>
     <main class="container">
@@ -69,9 +80,7 @@
                 </button>
                 <button class="btn check-in-btn">
                     <div class="items">
-                        <div class="heading">
-                            Check in
-                        </div>
+                        <div class="heading">Check in</div>
                         <div class="sub-heading">
                             Add dates
                         </div>
@@ -79,9 +88,7 @@
                 </button>
                 <button class="btn check-out-btn">
                     <div class="items">
-                        <div class="heading">
-                            Check out
-                        </div>
+                        <div class="heading">Check out</div>
                         <div class="sub-heading">
                             Add dates
                         </div>
@@ -98,9 +105,11 @@
                     </div>
                 </button>
                 <button class="btn search-btn">
-                    <div class="search-icon">
-                        <i class="fa-solid fa-magnifying-glass fa-xl icon"></i>
-                    </div>
+                    <a href="" id="nextPage">
+                        <div class="search-icon">
+                            <i class="fa-solid fa-magnifying-glass fa-xl icon"></i>
+                        </div>
+                    </a>
                 </button>
             </div>
         </section>
@@ -170,7 +179,7 @@
                     </ul>
 
                     <ul class="check-in-days">
-                        
+
                     </ul>
                 </div>
             </div>
@@ -202,7 +211,7 @@
                     </ul>
 
                     <ul class="days">
-                        
+
                     </ul>
                 </div>
             </div>
@@ -281,10 +290,9 @@
                 <p>
                     Not sure where to go? Perfect!
                 <p>
-                    <a href="./search.html">
+                    <a href="#">
                         <button class="flexible">I'm flexible</button>
                     </a>
-
             </div>
         </section>
 
