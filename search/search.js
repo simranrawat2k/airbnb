@@ -105,25 +105,7 @@ const wrapper = document.querySelector(".container .wrapper");
 })*/
 
 /*************************** API call **********************************/
-async function fetchData() {
-  const url = `https://airbnb13.p.rapidapi.com/search-location?location=${searchCity}&checkin=${searchCheckin}&checkout=${searchCheckout}&adults=${finalAdult}&children=${finalChild}&infants=${finalInfant}&pets=${finalPet}&page=1&currency=INR`;
-  const options = {
-    method: "GET",
-    headers: {
-      'X-RapidAPI-Key': 'e14b049c4bmsha4f6036285213f0p13d02ajsn30735b7791fe',
-      'X-RapidAPI-Host': 'airbnb13.p.rapidapi.com'
-    },
-  };
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    console.log(result);
-    displayCard(result);
-  } catch (error) {
-    console.log(error);
-    displayError();
-  }
-}
+
 
 
 
