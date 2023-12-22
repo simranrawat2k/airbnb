@@ -1,3 +1,5 @@
+
+
 const item = JSON.parse(localStorage.getItem("list"));
 console.log(item);
 
@@ -80,6 +82,15 @@ if (leftTime === 0) {
 } else {
   days = Math.floor(leftTime / 86400000) + 1;
 }
+
+const navPlace = document.querySelector(
+  ".navbar .search .search-bar .first-item"
+);
+
+/**********flag *********************/
+const storedFlag = JSON.parse(localStorage.getItem("err"));
+console.log(storedFlag);
+
 
 /*show photos*/
 
@@ -216,11 +227,17 @@ randomAmenitiesArray.forEach((x) => {
   showAmenities.append(p);
 });
 
-/*display cart*/
+/********************display cart***********************/
 
 const cartIn = document.querySelector(".flex-right .in-out .in .change");
 const cartOut = document.querySelector(".flex-right .in-out .out .change");
 const cartGuest = document.querySelector(".flex-right .cart .guest");
+const finalPerPriceDisplay = document.querySelector(
+  ".flex-right .money .per-person .one-person"
+);
+const finalPriceDisplay = document.querySelector(
+  ".flex-right .cart .final-pay"
+);
 
 const countMoney = document.querySelector(
   ".flex-right .cart .money .calculate-money"
@@ -230,7 +247,20 @@ const countTotalMoney = document.querySelector(
 );
 
 cartGuest.textContent = `Number of guest: ${totalNoGuest}`;
-countMoney.textContent = `10,000 X ${days}`;
+
+let finalPerPrice;
+let finalPrice;
+
+if (!storedFlag) {
+  countMoney.textContent = `12,000 X ${days}`;
+  finalPerPrice = 12000 * days - 2000 + 999;
+  finalPrice = finalPerPrice * totalNoGuest;
+  finalPerPriceDisplay.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${finalPerPrice}`;
+  finalPriceDisplay.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${finalPrice}`;
+} else {
+  countMoney.textContent = `10,000 X ${days}`;
+}
+
 cartIn.textContent = `${item[1][0]} ${item[1][1]} ${item[1][2]}`;
 cartOut.textContent = `${item[2][0]} ${item[2][1]} ${item[2][2]}`;
 
@@ -243,16 +273,66 @@ const houseAddress = document.querySelector(
 );
 
 const houseBaths = document.querySelector(".flex-box .flex-left .baths");
-houseBaths.innerHTML = `
+
+if (!storedFlag) {
+  houseBaths.innerHTML = `
+<p><i class="fa-solid fa-people-roof"></i> 1 rooms</p>
+<p><i class="fa-solid fa-bed"></i> 2 bed</p>
+<p><i class="fa-solid fa-shower"></i> 2 bathroom</p>                    
+`;
+
+  houseTitle.textContent = "Dudley Manor";
+  houseType.textContent = "Room in Badowala";
+  houseAddress.textContent = "Badowala, Uttarakhand, India";
+  navPlace.textContent = "India";
+} else {
+  houseBaths.innerHTML = `
 <p><i class="fa-solid fa-people-roof"></i> 2 rooms</p>
 <p><i class="fa-solid fa-bed"></i> 1 bed</p>
 <p><i class="fa-solid fa-shower"></i> 2 bathroom</p>                    
 `;
 
+  navPlace.textContent = item[0];
+}
+
+const calculatedMoney = document.querySelector(".money .calculate-total-money");
+
+if (!storedFlag) {
+  calculatedMoney.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${
+    days * 12000
+  }`;
+} else {
+  calculatedMoney.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${
+    days * 12000
+  }`;
+}
+
 /*display images*/
 
 const houseImage = document.querySelector(".box .image");
-houseImage.innerHTML = `
+
+if (!storedFlag) {
+
+  houseImage.innerHTML = `
+<div class="div see">
+    <img src="../assets/villa1.jpg" alt="photo">
+</div>
+<div class="div none">
+    <img src="../assets/villa2.jpg" alt="photo">
+</div>
+<div class="div none">
+    <img src="../assets/villa6.jpg" alt="photo">
+</div>
+<div class="div none">
+    <img src="../assets/villa4.jpg" alt="photo">
+</div>
+<div class="div none">
+    <img src="../assets/villa5.jpg" alt="photo">
+</div>
+`;
+} else {
+
+  houseImage.innerHTML = `
 <div class="div see">
     <img src="https://media.istockphoto.com/id/1301652138/photo/image-of-orange-sunset-with-cityscape-of-ghaziabad-urban-sprawl-india-viewed-from-residential.jpg?s=612x612&w=0&k=20&c=7d7Az3V9PnSlosFKHhZqt61Yl_m0Oppoix1mBrYDYys=" alt="photo">
 </div>
@@ -269,19 +349,40 @@ houseImage.innerHTML = `
     <img src="https://media.istockphoto.com/id/1301652138/photo/image-of-orange-sunset-with-cityscape-of-ghaziabad-urban-sprawl-india-viewed-from-residential.jpg?s=612x612&w=0&k=20&c=7d7Az3V9PnSlosFKHhZqt61Yl_m0Oppoix1mBrYDYys=" alt="photo">
 </div>
 `;
+}
 
 const houseShowPhotos = document.querySelector(".overlay .photo");
 
 const hostImg = document.querySelector(".flex-left .host-img");
-hostImg.innerHTML = `
+if (!storedFlag) {
+  hostImg.innerHTML = `
+<img src="../assets/host.jpg" alt="">
+`;
+} else {
+  hostImg.innerHTML = `
 <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg" alt="">
 `;
+}
 
+const changeRate = document.querySelector(
+  ".rates-reviews .flex-rates .change-rate"
+);
+const changeReview = document.querySelector(
+  ".rates-reviews .flex-review .change-review"
+);
 const hostName = document.querySelector(".flex-left .flex-host .host-name");
-hostName.innerHTML = `
+
+if (!storedFlag) {
+  hostName.innerHTML = `
+<p>Hosted by Anil</p>
+<p>Super host</p>
+`;
+
+  changeRate.textContent = "4.2";
+  changeReview.textContent = "54";
+} else {
+  hostName.innerHTML = `
 <p>Hosted by Reevati</p>
-<p>Superhost</p>
-`
-  
-  
-      
+<p>Super host</p>
+`;
+}

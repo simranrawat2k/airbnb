@@ -190,9 +190,37 @@
     gap:10px;
 }
 
-.grid .error{
+.box .error{
     font-size: 1.5rem;
     text-align: center;
+
+}
+
+/*loader*/
+
+.wrapper{
+    height:80vh;
+    display:none;
+}
+
+.loader{
+    display: none;
+    height: 10em;
+    width:10em;
+    border: 2em solid rgb(244, 241, 241) ;
+    border-radius: 50%;
+    border-top-color:#de3151 ;
+    position:absolute;
+    transform: translate(-50%, -50%);
+    left:50%;
+    top:100px;
+    animation: spin 3s infinite;
+}
+
+@keyframes spin {
+    100%{
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 
