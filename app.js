@@ -130,7 +130,7 @@ function displayInitials(initials) {
 }
 
 divElement.addEventListener("click", () => {
-  singInOut.classList.add("visible");////////////////////////////////////////////////////////
+  singInOut.classList.add("visible");
 });
 
 document.addEventListener("click", (event) => {
@@ -667,6 +667,11 @@ searchBtn.addEventListener("click", () => {
     }
     if (verifyIn > verifyOut) {
       alert("Check-in date must be greater than Check-out date");
+      return;
+    }
+
+    if(adults<=0){
+      alert("Add atleast one adult");
       return;
     }
 
