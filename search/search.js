@@ -17,8 +17,6 @@ if (item[0] === "Canada") {
   searchCity = "Paris";
 }
 
-
-
 const months = [
   "Jan",
   "Feb",
@@ -55,11 +53,9 @@ for (let j = 0; j < months.length; j++) {
   i++;
 }
 
-
 let checkInYear = item[1][2];
 let finalCheckin = [checkInYear, i, checkInDate];
 searchCheckin = finalCheckin.join("-"); /////////////////////////
-
 
 let searchCheckout = item[2];
 let checkOutDate = item[2][0];
@@ -85,7 +81,6 @@ let checkOutYear = item[2][2];
 let finalCheckout = [checkOutYear, q, checkOutDate];
 searchCheckout = finalCheckout.join("-"); /////////////////////////
 
-
 let finalAdult = `${item[3][1]}`;
 
 let finalChild = `${item[3][2]}`;
@@ -93,21 +88,37 @@ let finalInfant = `${item[3][3]}`;
 let finalPet = `${item[3][4]}`;
 
 const grid = document.querySelector(".box .grid");
-const errorCard= document.querySelector(".box .errorCard");
+const errorCard = document.querySelector(".box .errorCard");
 
 /*************************** On load ***********************************/
 const loader = document.querySelector(".container .wrapper .loader");
 const wrapper = document.querySelector(".container .wrapper");
-/*window.addEventListener("load", ()=>{
+window.addEventListener("load", ()=>{
   loader.style.display = "block";
   wrapper.style.display = "block";
   fetchData();
-})*/
+})
 
 /*************************** API call **********************************/
-
-
-
+async function fetchData() {
+  const url = `https://airbnb13.p.rapidapi.com/search-location?location=${searchCity}&checkin=${searchCheckin}&checkout=${searchCheckout}&adults=${finalAdult}&children=${finalChild}&infants=${finalInfant}&pets=${finalPet}&page=1&currency=INR`;
+  const options = {
+    method: "GET",
+    headers: {
+    'X-RapidAPI-Key': '676d487f1dmsh66e6be7c9148776p1b001bjsnd1cec72c5a93',
+    'X-RapidAPI-Host': 'airbnb13.p.rapidapi.com'
+  },
+  };
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    console.log(result);
+    displayCard(result);
+  } catch (error) {
+    console.log(error);
+    displayError();
+  }
+}
 
 const popularCities = [
   "Paris",
@@ -168,13 +179,12 @@ popularCities.forEach((x) => {
 });
 
 const searchIcon = document.querySelector(".search #search-icon");
-let flag =true;
-
+let flag = true;
 
 searchIcon.addEventListener("click", (e) => {
   e.preventDefault();
   let cityName = inputName.value.trim();
-  if(cityName.length<1){
+  if (cityName.length < 1) {
     cityName = "paris";
   }
   const cityArr = cityName.split(" ");
@@ -186,10 +196,13 @@ searchIcon.addEventListener("click", (e) => {
   console.log(searchCity);
   loader.style.display = "block";
   wrapper.style.display = "block";
+  footer.style.display = "none";
   grid.innerHTML = ``;
   fetchData();
-
 });
+
+const footer = document.querySelector(".footer");
+
 
 /**************** displaying data **************************/
 
@@ -200,35 +213,40 @@ let property = {
   price: 14000,
   host: {
     persons: 1,
-    img: ""
+    img: "",
   },
   details: {
     room: 1,
     bed: 2,
-    bath: 2
+    bath: 2,
   },
   rating: {
     rate: 4.2,
-    review: 56
-  }
+    review: 56,
+  },
 };
-
 
 /*const propertyString = JSON.stringify(property);
 const sizeInBytes = new Blob([propertyString]).size;
 console.log("Size of property object in bytes:", sizeInBytes);*/
 
-
 function displayCard(data) {
-
   loader.style.display = "none";
   wrapper.style.display = "none";
+  footer.style.display = "block";
+
+  let likedItems = JSON.parse(localStorage.getItem("liked")) || [];
+  console.log(likedItems)
 
   grid.innerHTML = ``;
 
   const item = data.results;
 
   item.forEach((x) => {
+    let r = x.id;
+    let isLiked = likedItems.some((item) => item.likedId == r);
+   
+
     const money = x.price.priceItems;
     let pay = "";
     if (money.length < 1) {
@@ -252,7 +270,11 @@ function displayCard(data) {
                 </div>
                 <div class="card-content">
                       <p>${x.type}</p>
-                      <h2>${x.name}</h2>
+                      <div class="watchlist">
+                        <h2>${x.name}</h2>
+                           <p class="unlike-heart"><i class="fa-solid fa-heart"></i></p>
+                           <p class="like-heart"><i class="fa-regular fa-heart"></i></p>                         
+                      </div>
 
                       <p class="beds"><span>bedroom: ${
                         x.beds
@@ -283,16 +305,16 @@ function displayCard(data) {
     `;
     grid.append(card);
 
-    card.addEventListener("click", ()=>{
-      console.log("card is clicked", x)
+    card.addEventListener("click", () => {
+      console.log("card is clicked", x);
       flag = true;
       localStorage.setItem("err", JSON.stringify(flag));
-      property.heading =  x.name || "";
+      property.heading = x.name || "";
       property.type = x.type || "";
       property.address = x.address || "";
       property.price = pay || 0;
       property.host.persons = x.persons || 1;
-      property.host.img= x.hostThumbnail || "";
+      property.host.img = x.hostThumbnail || "";
       property.details.room = x.beds || 0;
       property.details.bed = x.bedrooms || 0;
       property.details.bath = x.bathrooms || 0;
@@ -303,7 +325,7 @@ function displayCard(data) {
 
       let finalPics = [];
 
-      for(let i=0; i<8; i++){
+      for (let i = 0; i < 9; i++) {
         finalPics.push(pics[i]);
       }
 
@@ -311,23 +333,56 @@ function displayCard(data) {
       localStorage.setItem("images", JSON.stringify(finalPics));
 
       window.location.href = "../listing/listing.html";
-    })
+    });
+
+    const likeHeart = card.querySelector(".card-content .like-heart");
+    const unlikeHeart = card.querySelector(".card-content .unlike-heart");
+    if(isLiked){
+      unlikeHeart.style.display = "block";
+      likeHeart.style.display = "none";
+    }else{
+      unlikeHeart.style.display = "none";
+      likeHeart.style.display = "block";
+    }
+    
+
+    likeHeart.addEventListener("click", (e) => {
+      e.stopPropagation();
+      likeHeart.style.display = "none";
+      unlikeHeart.style.display = "block";
+      let likedobj = {
+        likedId: x.id,
+        thumb: x.images[0],
+        likedHeading: x.name,
+        likedPrice: pay,
+        likedPlace: x.address
+      };
+      likedItems.push(likedobj);
+      localStorage.setItem("liked", JSON.stringify(likedItems));
+      console.log("card liked");
+    });
+
+    unlikeHeart.addEventListener("click", (e) => {
+      e.stopPropagation();
+      unlikeHeart.style.display = "none";
+      likeHeart.style.display = "block";
+      likedItems = likedItems.filter((i) => i.likedId !== x.id);
+      localStorage.setItem("liked", JSON.stringify(likedItems));
+      console.log("card unliked");
+    });
   });
 }
 
-
-
 function displayError() {
-
   loader.style.display = "none";
   wrapper.style.display = "none";
 
   grid.innerHTML = ``;
   errorCard.innerHTML = ``;
 
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `
                 <div class="image">
                   <img src="../assets/villa1.jpg"
                     alt="No photos available">
@@ -357,18 +412,18 @@ function displayError() {
                   </div>
                 </div>
     `;
-    grid.append(card);
+  grid.append(card);
 
-    const pElement = document.createElement("p");
-    pElement.innerHTML = `Sorry, No more rooms available right now!`;
-    pElement.className = "error";
+  const pElement = document.createElement("p");
+  pElement.innerHTML = `Sorry, No more rooms available right now!`;
+  pElement.className = "error";
 
-    errorCard.append(pElement);
+  errorCard.append(pElement);
 
-      flag = false;
-      localStorage.setItem("err", JSON.stringify(flag));
-    
-    card.addEventListener("click", ()=>{
-      window.location.href = "../listing/listing.html";
-    })
+  flag = false;
+  localStorage.setItem("err", JSON.stringify(flag));
+
+  card.addEventListener("click", () => {
+    window.location.href = "../listing/listing.html";
+  });
 }

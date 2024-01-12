@@ -1,7 +1,10 @@
-
-
 const item = JSON.parse(localStorage.getItem("list"));
-console.log(item);
+
+const properties = JSON.parse(localStorage.getItem("property"));
+let inputString = properties.price;
+let numberPrice = parseInt(inputString.substring(1).replace(",", ""), 10);
+
+const houseImg = JSON.parse(localStorage.getItem("images"));
 
 const totalGuest = document.querySelector(".search .last-item");
 
@@ -258,7 +261,11 @@ if (!storedFlag) {
   finalPerPriceDisplay.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${finalPerPrice}`;
   finalPriceDisplay.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${finalPrice}`;
 } else {
-  countMoney.textContent = `10,000 X ${days}`;
+  countMoney.textContent = `${properties.price} X ${days}`;
+  finalPerPrice = numberPrice * days - 2000 + 999;
+  finalPrice = finalPerPrice * totalNoGuest;
+  finalPerPriceDisplay.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${finalPerPrice.toLocaleString()}`;
+  finalPriceDisplay.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${finalPrice.toLocaleString()}`;
 }
 
 cartIn.textContent = `${item[1][0]} ${item[1][1]} ${item[1][2]}`;
@@ -287,10 +294,14 @@ if (!storedFlag) {
   navPlace.textContent = "India";
 } else {
   houseBaths.innerHTML = `
-<p><i class="fa-solid fa-people-roof"></i> 2 rooms</p>
-<p><i class="fa-solid fa-bed"></i> 1 bed</p>
-<p><i class="fa-solid fa-shower"></i> 2 bathroom</p>                    
+<p><i class="fa-solid fa-people-roof"></i> ${properties.details.room} rooms</p>
+<p><i class="fa-solid fa-bed"></i> ${properties.details.bed} bed</p>
+<p><i class="fa-solid fa-shower"></i> ${properties.details.bath} bathroom</p>                    
 `;
+
+  houseTitle.textContent = `${properties.heading}`;
+  houseType.textContent = `${properties.type}`;
+  houseAddress.textContent = `${properties.address}`;
 
   navPlace.textContent = item[0];
 }
@@ -299,11 +310,11 @@ const calculatedMoney = document.querySelector(".money .calculate-total-money");
 
 if (!storedFlag) {
   calculatedMoney.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${
-    days * 12000
+    (days * 12000).toLocaleString()
   }`;
 } else {
   calculatedMoney.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${
-    days * 12000
+    (days * numberPrice).toLocaleString()
   }`;
 }
 
@@ -334,19 +345,19 @@ if (!storedFlag) {
 
   houseImage.innerHTML = `
 <div class="div see">
-    <img src="https://media.istockphoto.com/id/1301652138/photo/image-of-orange-sunset-with-cityscape-of-ghaziabad-urban-sprawl-india-viewed-from-residential.jpg?s=612x612&w=0&k=20&c=7d7Az3V9PnSlosFKHhZqt61Yl_m0Oppoix1mBrYDYys=" alt="photo">
+    <img src="${houseImg[0]}" alt="photo">
 </div>
 <div class="div none">
-    <img src="https://media.istockphoto.com/id/1301652138/photo/image-of-orange-sunset-with-cityscape-of-ghaziabad-urban-sprawl-india-viewed-from-residential.jpg?s=612x612&w=0&k=20&c=7d7Az3V9PnSlosFKHhZqt61Yl_m0Oppoix1mBrYDYys=" alt="photo">
+    <img src="${houseImg[1]}" alt="photo">
 </div>
 <div class="div none">
-    <img src="https://media.istockphoto.com/id/1301652138/photo/image-of-orange-sunset-with-cityscape-of-ghaziabad-urban-sprawl-india-viewed-from-residential.jpg?s=612x612&w=0&k=20&c=7d7Az3V9PnSlosFKHhZqt61Yl_m0Oppoix1mBrYDYys=" alt="photo">
+    <img src="${houseImg[2]}" alt="photo">
 </div>
 <div class="div none">
-    <img src="https://media.istockphoto.com/id/1301652138/photo/image-of-orange-sunset-with-cityscape-of-ghaziabad-urban-sprawl-india-viewed-from-residential.jpg?s=612x612&w=0&k=20&c=7d7Az3V9PnSlosFKHhZqt61Yl_m0Oppoix1mBrYDYys=" alt="photo">
+    <img src="${houseImg[3]}" alt="photo">
 </div>
 <div class="div none">
-    <img src="https://media.istockphoto.com/id/1301652138/photo/image-of-orange-sunset-with-cityscape-of-ghaziabad-urban-sprawl-india-viewed-from-residential.jpg?s=612x612&w=0&k=20&c=7d7Az3V9PnSlosFKHhZqt61Yl_m0Oppoix1mBrYDYys=" alt="photo">
+    <img src="${houseImg[4]}" alt="photo">
 </div>
 `;
 }
@@ -360,7 +371,7 @@ if (!storedFlag) {
 `;
 } else {
   hostImg.innerHTML = `
-<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg" alt="">
+<img src="${properties.host.img}" alt="">
 `;
 }
 
@@ -370,19 +381,32 @@ const changeRate = document.querySelector(
 const changeReview = document.querySelector(
   ".rates-reviews .flex-review .change-review"
 );
-const hostName = document.querySelector(".flex-left .flex-host .host-name");
+const hostName = document.querySelector(".flex-left .flex-host .host-name .hosting-years");
 
 if (!storedFlag) {
-  hostName.innerHTML = `
-<p>Hosted by Anil</p>
-<p>Super host</p>
-`;
+  hostName.textContent = "2 Years Hosting";
 
   changeRate.textContent = "4.2";
   changeReview.textContent = "54";
 } else {
-  hostName.innerHTML = `
-<p>Hosted by Reevati</p>
-<p>Super host</p>
-`;
+  hostName.textContent = `${properties.host.persons} Years Hosting`;
+  changeRate.textContent = `${properties.rating.rate}`;
+  changeReview.textContent = `${properties.rating.review}`;
 }
+
+
+const modalImg = document.querySelector(".overlay .photo");
+if(storedFlag){
+  modalImg.innerHTML = ``;
+}
+
+houseImg.forEach((x)=>{
+  const divElement = document.createElement("div");
+  divElement.className = "pics";
+
+  divElement.innerHTML = `
+  <img src="${x}" alt="">
+  `;
+
+  modalImg.append(divElement);
+})
