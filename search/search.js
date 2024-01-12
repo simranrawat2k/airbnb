@@ -101,14 +101,7 @@ window.addEventListener("load", ()=>{
 
 /*************************** API call **********************************/
 async function fetchData() {
-  const url = `https://airbnb13.p.rapidapi.com/search-location?location=${searchCity}&checkin=${searchCheckin}&checkout=${searchCheckout}&adults=${finalAdult}&children=${finalChild}&infants=${finalInfant}&pets=${finalPet}&page=1&currency=INR`;
-  const options = {
-    method: "GET",
-    headers: {
-    'X-RapidAPI-Key': '676d487f1dmsh66e6be7c9148776p1b001bjsnd1cec72c5a93',
-    'X-RapidAPI-Host': 'airbnb13.p.rapidapi.com'
-  },
-  };
+  
   try {
     const response = await fetch(url, options);
     const result = await response.json();
